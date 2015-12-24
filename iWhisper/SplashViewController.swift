@@ -46,13 +46,13 @@ class SplashViewController: UIViewController {
     }
     
     func showSplashHtml() {
-        print("display url\(self.splashHtmlUrl)")
+        print("display url\(self.splashHtmlUrl)", terminator: "")
         self.splashView.loadRequest( NSURLRequest(URL: NSURL(string: self.splashHtmlUrl!)!))
     }
     
     //动画显示完毕后,把页面跳转到主视图
     func presentNextViewController(timer:NSTimer){
-        print("\(timer.userInfo as? UINavigationController)")
+        print("\(timer.userInfo as? UINavigationController)", terminator: "")
         let rootNavigationViewController:UINavigationController = timer.userInfo as! UINavigationController
         self.presentViewController(rootNavigationViewController, animated: true) { () -> Void in
         }

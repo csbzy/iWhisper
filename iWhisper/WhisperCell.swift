@@ -18,7 +18,6 @@ class WhisperCell: UITableViewCell {
     
     weak var whisper : Whisper? {
     didSet{
-            print("did set cell\(whisper)   ")
             self.backgroundImage.hnk_setImageFromURL(NSURL(string: (whisper?.backgroundImage)!)!)
             self.contentLabel.text =  whisper?.contentText
         }

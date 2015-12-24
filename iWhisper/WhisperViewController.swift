@@ -23,32 +23,42 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let config = WhisperConfig.sharedInstance.config
         
-            let feedJsons = config!["feeds"]
+        let feedJsons = config!["feeds"]
         
         let nib = UINib(nibName: "WhisperCell", bundle: nil)
         
         
-        let Width = WhisperScrollView.frame.size.width
-        let Height = WhisperScrollView.frame.size.height
+       
         
+        let bounds = UIScreen.mainScreen().bounds
+        let width = bounds.size.width
+        let height = bounds.size.height
+        
+        let Width  =  WhisperScrollView.frame.size.width 
+        let Height = WhisperScrollView.frame.size.height
+        print("scroll view \(Width),\(Height)\n screen view \(width) \(height)  \(WhisperScrollView.frame.origin.x)")
         var index = 0
         for (_,feed):(String,SwiftyJSON.JSON) in feedJsons{
             let View = UITableView()
             feeds.append(Feed(json: feed))
-            View.dataSource = self
-            View.delegate = self
-            View.frame = CGRectMake(CGFloat(index) * Width	 ,WhisperScrollView.frame.origin.y 	,Width,Height)
-            index += 1
-            print(index)
+            let startX = (CGFloat(index) * width )
+            View.frame = CGRectMake( WhisperScrollView.frame.origin.x + startX ,WhisperScrollView.frame.origin.y 	,width - WhisperScrollView.frame.origin.x,height)
             View.registerClass(WhisperCell.self,forCellReuseIdentifier:"WhisperCell")
             View.registerNib(nib, forCellReuseIdentifier: "WhisperCell")
             WhisperScrollView.addSubview(View)
-            keyValue.setValue(index,forKey: View)
+            keyValue[View] = index
             feedsViews.append(View)
+            View.dataSource = self
+            View.delegate = self
+            View.estimatedRowHeight = 300
+            View.rowHeight = UITableViewAutomaticDimension
+            index += 1
+            
         }
-        let contentW: CGFloat = (CGFloat(feedJsons.array!.count) *  Width)
+        let contentW: CGFloat = (CGFloat(feedJsons.array!.count) *  width)
         WhisperScrollView.contentSize = CGSizeMake(contentW,0)
         WhisperScrollView.pagingEnabled = true
         WhisperScrollView.delegate  = self
@@ -58,13 +68,13 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     }
 
     func initData(){
-        for i in 0...feedsViews.count{
+        for i in 0...(feedsViews.count - 1){
             getWhisperData(i)
         }
     }
     
     func getWhisperData(index:Int){
-        print("get whisper data")
+        print("get whisper data\(index)")
         var feedParams = Dictionary<String,AnyObject>()
         if( feeds[index].needLocation != nil) {
             feedParams = ["feed_id":feeds[index].id!, "type":feeds[index].type!,"limit":LIMIT,"uid":UID,"lat":22.54911,"lon":113.942959]
@@ -78,10 +88,12 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             {
                 response in
                 let json = SwiftyJSON.JSON(response.result.value!)
+                var whispersInIndex = [Whisper]()
                 for (_,item):(String,SwiftyJSON.JSON) in json["whispers"]{
                     let whisper = Whisper(json:item)
-                    self.whispers[index].append(whisper)
+                    whispersInIndex.append(whisper)
                 }
+                self.whispers.append(whispersInIndex)
                 print("reload data")
                 self.feedsViews[index].reloadData()
         }
@@ -98,17 +110,29 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         return 1
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return ( WhisperScrollView.frame.size.height / 3)
+
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return whispers.count
+        let index = keyValue[tableView]
+        if index < whispers.count   {
+            return whispers[index!].count
+        }else{
+            return 0
+        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let index = tableView.whisperIndex
-        print("dispaly")
+        let index = keyValue[tableView]
         let cell = tableView.dequeueReusableCellWithIdentifier("WhisperCell", forIndexPath: indexPath) as! WhisperCell
-        print("display")
-        cell.whisper = whispers[index][indexPath.row]
+        if index < whispers.count   {
+            cell.whisper = whispers[index!][indexPath.row]
+        }
+
         return cell
     }
 

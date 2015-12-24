@@ -21,7 +21,7 @@ class WhisperConfig {
     }
     
     func getConfigOnline( callback : () -> Void){
-            print("get config online")
+        print("get config online")
         Alamofire.request(.GET, SPLASH_HTML_URL,parameters:["type":"ios","uid": UID])
                 .responseJSON { response in
                     let json = SwiftyJSON.JSON(response.result.value!)

@@ -2,42 +2,43 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="WhisperCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="WhisperCell" rowHeight="197" id="CGi-5o-259" userLabel="WhisperCell" customClass="WhisperCell" customModule="iWhisper" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="426" height="197"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" restorationIdentifier="WhisperCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="WhisperCell" rowHeight="299" id="CGi-5o-259" userLabel="WhisperCell" customClass="WhisperCell" customModule="iWhisper" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="609" height="299"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CGi-5o-259" id="IcM-Nb-JSu">
-                <rect key="frame" x="0.0" y="0.0" width="426" height="196"/>
+                <rect key="frame" x="0.0" y="0.0" width="609" height="298"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pi-fh-BQE" userLabel="contentText">
-                        <rect key="frame" x="0.0" y="87" width="426" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pi-fh-BQE" userLabel="contentText">
+                        <rect key="frame" x="16" y="142" width="577" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ibV-PQ-nut" userLabel="backgroundImage">
-                        <rect key="frame" x="0.0" y="0.0" width="426" height="196"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ibV-PQ-nut" userLabel="backgroundImage">
+                        <rect key="frame" x="9" y="9" width="591" height="280"/>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3pi-fh-BQE" firstAttribute="centerX" secondItem="ibV-PQ-nut" secondAttribute="centerX" id="1so-zD-JZf"/>
-                    <constraint firstItem="ibV-PQ-nut" firstAttribute="width" secondItem="IcM-Nb-JSu" secondAttribute="width" id="7Qf-Z3-Ym8"/>
-                    <constraint firstItem="3pi-fh-BQE" firstAttribute="width" secondItem="ibV-PQ-nut" secondAttribute="width" id="H65-D3-wzd"/>
+                    <constraint firstItem="3pi-fh-BQE" firstAttribute="leading" secondItem="IcM-Nb-JSu" secondAttribute="leadingMargin" constant="8" id="Cab-UV-cYX"/>
+                    <constraint firstItem="ibV-PQ-nut" firstAttribute="top" secondItem="IcM-Nb-JSu" secondAttribute="topMargin" constant="1" id="ThI-2p-m5c"/>
                     <constraint firstItem="3pi-fh-BQE" firstAttribute="centerY" secondItem="ibV-PQ-nut" secondAttribute="centerY" id="VoW-hS-TRf"/>
-                    <constraint firstItem="ibV-PQ-nut" firstAttribute="centerX" secondItem="IcM-Nb-JSu" secondAttribute="centerX" id="bIv-e5-1ib"/>
-                    <constraint firstItem="ibV-PQ-nut" firstAttribute="height" secondItem="IcM-Nb-JSu" secondAttribute="height" id="pey-ms-et1"/>
-                    <constraint firstItem="ibV-PQ-nut" firstAttribute="centerY" secondItem="IcM-Nb-JSu" secondAttribute="centerY" id="qeG-vw-kpV"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ibV-PQ-nut" secondAttribute="bottom" constant="1" id="bMQ-Ut-hfh"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ibV-PQ-nut" secondAttribute="trailing" constant="1" id="hD9-bw-UcT"/>
+                    <constraint firstItem="ibV-PQ-nut" firstAttribute="leading" secondItem="IcM-Nb-JSu" secondAttribute="leadingMargin" constant="1" id="hSv-ot-KeZ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3pi-fh-BQE" secondAttribute="trailing" constant="8" id="iM4-DK-kku"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImage" destination="ibV-PQ-nut" id="r2i-jq-eoy"/>
                 <outlet property="contentLabel" destination="3pi-fh-BQE" id="6zC-Nk-7JE"/>
             </connections>
-            <point key="canvasLocation" x="409" y="404.5"/>
+            <point key="canvasLocation" x="500.5" y="455.5"/>
         </tableViewCell>
     </objects>
 </document>

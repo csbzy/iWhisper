@@ -28,7 +28,7 @@ class FeedTableViewController: UIViewController ,UITableViewDelegate, UITableVie
     }
     var feed : Feed?{
         didSet{
-            print("set feed")
+            print("set feed", terminator: "")
         }
     }
     
@@ -37,13 +37,17 @@ class FeedTableViewController: UIViewController ,UITableViewDelegate, UITableVie
         // Custom initialization
     }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func initData(){
         
         getWhisperData()
     }
     
     func getWhisperData(){
-        print("get whisper data")
+        print("get whisper data", terminator: "")
         var feedParams = Dictionary<String,AnyObject>()
         if( self.feed!.needLocation != nil) {
             feedParams = ["feed_id":self.feed!.id!, "type":self.feed!.type!,"limit":LIMIT,"uid":UID,"lat":22.54911,"lon":113.942959]
@@ -74,7 +78,7 @@ class FeedTableViewController: UIViewController ,UITableViewDelegate, UITableVie
         self.whisperTableView!.registerNib(nib, forCellReuseIdentifier: "WhisperCell")
         whisperTableView!.estimatedRowHeight = whisperTableView!.rowHeight
         whisperTableView!.rowHeight = UITableViewAutomaticDimension
-        print("view did load")
+        print("view did load", terminator: "")
         initData()
         
         
@@ -86,9 +90,9 @@ class FeedTableViewController: UIViewController ,UITableViewDelegate, UITableVie
         
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    required init(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -106,7 +110,7 @@ class FeedTableViewController: UIViewController ,UITableViewDelegate, UITableVie
 //    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("dispaly")
+        print("dispaly", terminator: "")
         let cell = tableView.dequeueReusableCellWithIdentifier("WhisperCell", forIndexPath: indexPath) as! WhisperCell
 //
 //        cell.joke = jokes[indexPath.row]
@@ -117,7 +121,7 @@ class FeedTableViewController: UIViewController ,UITableViewDelegate, UITableVie
 //            getJokeData()
 //        }
 //        cell.updateConstraintsIfNeeded()
-        print("display")
+        print("display", terminator: "")
         cell.whisper = whispers[indexPath.row]
         return cell
     }

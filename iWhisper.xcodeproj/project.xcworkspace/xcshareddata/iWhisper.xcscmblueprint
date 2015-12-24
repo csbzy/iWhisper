@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E6708B103A22F2F0DADA511115CD8CA53C76690D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C93564C1AFB8B50FF58188F21182F5D0EEAD1C3F" : 0,
+    "E6708B103A22F2F0DADA511115CD8CA53C76690D" : 0,
+    "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3" : 0,
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7B65D9E4-4843-4127-B18D-9A5E0E0BE128",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C93564C1AFB8B50FF58188F21182F5D0EEAD1C3F" : "iWhisper\/iWhisper\/LIBRARY\/",
+    "E6708B103A22F2F0DADA511115CD8CA53C76690D" : "iWhisper\/",
+    "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3" : "iWhisper\/iWhisper\/LIBRARY\/SwiftyJSON\/",
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "iWhisper\/iWhisper\/LIBRARY\/Alamofire\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iWhisper",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iWhisper.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67620B5EFA902936DF04070AF595B76AB0333747"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SwiftyJSON\/SwiftyJSON.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Haneke\/HanekeSwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C93564C1AFB8B50FF58188F21182F5D0EEAD1C3F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:chenshaobo\/iWhisper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E6708B103A22F2F0DADA511115CD8CA53C76690D"
+    }
+  ]
+}
