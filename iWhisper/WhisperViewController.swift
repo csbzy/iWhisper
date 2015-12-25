@@ -35,13 +35,14 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         let width = bounds.size.width
         let height = bounds.size.height
         
+        print("\(topBarView.frame.origin.y) \(topBarView.frame.origin.y + topBarView.frame.height) \(WhisperScrollView.frame.origin.y)")
         
         var index = 0
         for (_,feed):(String,SwiftyJSON.JSON) in feedJsons{
             
             feeds.append(Feed(json: feed))
             let startX = (CGFloat(index) * width )
-            let frame =  CGRectMake( WhisperScrollView.frame.origin.x + startX , topBarView.frame.origin.y + topBarView.frame.height ,width - WhisperScrollView.frame.origin.x,height)
+            let frame =  CGRectMake( WhisperScrollView.frame.origin.x + startX ,-20,width - WhisperScrollView.frame.origin.x,height)
             let View = UITableView(frame:frame,style:.Plain)
             View.headerViewForSection(0)
             View.registerClass(WhisperCell.self,forCellReuseIdentifier:"WhisperCell")
@@ -133,7 +134,15 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         return cell
     }
     
-
+//    //set Header Height
+//     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 20;
+//    }
+//    
+//    //set Header Title
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Hello"
+//    }
 
 }
 
