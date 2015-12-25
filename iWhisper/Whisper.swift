@@ -16,9 +16,13 @@ class Whisper {
         self.contentText    = json["text"].string!
         self.me2Count    = json["me2"].int!
         self.wid = json["wid"].string
+        self.replies = json["replies"].int
+        self.distanceText = json["meta",0,"display_text"].string
     }
     let wid : String?
     let backgroundImage :String?
     let contentText : String?
     let me2Count : Int?
+    let replies : Int?
+    let distanceText : String?
 }
