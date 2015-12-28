@@ -33,19 +33,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYD-ld-cGN">
-                                <rect key="frame" x="227" y="20" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vR7-dP-RYk">
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAF-W0-i6u" userLabel="WhisperTopView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uIF-vG-oJQ" userLabel="PersonInfo">
+                                        <rect key="frame" x="8" y="8" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="nqn-tY-bId"/>
+                                            <constraint firstAttribute="width" constant="15" id="qPw-p6-B6K"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_mine_default">
+                                            <attributedString key="attributedTitle"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deo-FK-dwf" userLabel="Message">
+                                        <rect key="frame" x="577" y="8" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="5Sj-KZ-OSv"/>
+                                            <constraint firstAttribute="width" constant="15" id="JcQ-4o-vbh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="7"/>
+                                        <state key="normal" image="btn_message_normal"/>
+                                    </button>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="253" horizontalCompressionResistancePriority="756" verticalCompressionResistancePriority="756" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="CdR-9Q-s9Z" userLabel="TopLabelScrollView">
+                                        <rect key="frame" x="31" y="0.0" width="538" height="30"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="JaQ-XT-Vug"/>
+                                    <constraint firstItem="uIF-vG-oJQ" firstAttribute="leading" secondItem="EAF-W0-i6u" secondAttribute="leading" constant="8" id="28p-s3-BXf"/>
+                                    <constraint firstItem="Deo-FK-dwf" firstAttribute="leading" secondItem="CdR-9Q-s9Z" secondAttribute="trailing" constant="8" id="3Dq-L5-dEE"/>
+                                    <constraint firstItem="Deo-FK-dwf" firstAttribute="top" secondItem="uIF-vG-oJQ" secondAttribute="top" id="Gqq-TO-brS"/>
+                                    <constraint firstItem="uIF-vG-oJQ" firstAttribute="centerY" secondItem="EAF-W0-i6u" secondAttribute="centerY" id="Jho-Hj-uS8"/>
+                                    <constraint firstItem="Deo-FK-dwf" firstAttribute="bottom" secondItem="uIF-vG-oJQ" secondAttribute="bottom" id="Mrg-YC-ArI"/>
+                                    <constraint firstItem="CdR-9Q-s9Z" firstAttribute="top" secondItem="EAF-W0-i6u" secondAttribute="top" id="NV8-U3-IQT"/>
+                                    <constraint firstItem="CdR-9Q-s9Z" firstAttribute="centerX" secondItem="EAF-W0-i6u" secondAttribute="centerX" id="PG5-yg-BHe"/>
+                                    <constraint firstItem="CdR-9Q-s9Z" firstAttribute="centerY" secondItem="EAF-W0-i6u" secondAttribute="centerY" id="THA-oG-zmn"/>
+                                    <constraint firstAttribute="bottom" secondItem="CdR-9Q-s9Z" secondAttribute="bottom" id="UBY-Ea-47P"/>
+                                    <constraint firstItem="Deo-FK-dwf" firstAttribute="centerY" secondItem="EAF-W0-i6u" secondAttribute="centerY" id="UdQ-My-a39"/>
+                                    <constraint firstItem="CdR-9Q-s9Z" firstAttribute="leading" secondItem="uIF-vG-oJQ" secondAttribute="trailing" constant="8" id="eF9-DD-nK9"/>
+                                    <constraint firstAttribute="height" constant="30" id="fGz-5q-BaN"/>
+                                    <constraint firstItem="Deo-FK-dwf" firstAttribute="leading" secondItem="CdR-9Q-s9Z" secondAttribute="trailing" constant="8" id="m6W-Jb-RW7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Deo-FK-dwf" secondAttribute="trailing" constant="8" id="uUv-1M-xK7"/>
                                 </constraints>
-                                <items/>
-                            </toolbar>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sll-wn-nuF">
                                 <rect key="frame" x="0.0" y="50" width="600" height="542"/>
                                 <connections>
@@ -55,24 +86,35 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sll-wn-nuF" firstAttribute="top" secondItem="vR7-dP-RYk" secondAttribute="bottom" id="143-Mk-hq8"/>
-                            <constraint firstItem="vR7-dP-RYk" firstAttribute="width" secondItem="HTH-9l-TQ1" secondAttribute="width" id="BPD-YO-26a"/>
+                            <constraint firstItem="EAF-W0-i6u" firstAttribute="top" secondItem="pdk-eI-PRU" secondAttribute="bottom" id="4L5-Fb-JKt"/>
+                            <constraint firstItem="EAF-W0-i6u" firstAttribute="width" secondItem="HTH-9l-TQ1" secondAttribute="width" id="6oB-8s-fNT"/>
                             <constraint firstItem="Sll-wn-nuF" firstAttribute="width" secondItem="HTH-9l-TQ1" secondAttribute="width" id="Igg-VH-MCp"/>
-                            <constraint firstItem="vR7-dP-RYk" firstAttribute="centerX" secondItem="HTH-9l-TQ1" secondAttribute="centerX" id="X2o-55-aQS"/>
+                            <constraint firstItem="EAF-W0-i6u" firstAttribute="centerX" secondItem="HTH-9l-TQ1" secondAttribute="centerX" id="KoA-In-nuz"/>
+                            <constraint firstItem="EAF-W0-i6u" firstAttribute="top" secondItem="pdk-eI-PRU" secondAttribute="bottom" id="Yy8-PJ-MWf"/>
                             <constraint firstItem="ERQ-mg-f7K" firstAttribute="top" secondItem="Sll-wn-nuF" secondAttribute="bottom" constant="8" id="aAf-e9-Udh"/>
-                            <constraint firstItem="vR7-dP-RYk" firstAttribute="top" secondItem="pdk-eI-PRU" secondAttribute="bottom" id="cWB-UA-HeF"/>
+                            <constraint firstItem="Sll-wn-nuF" firstAttribute="top" secondItem="EAF-W0-i6u" secondAttribute="bottom" id="f4R-L5-frT"/>
+                            <constraint firstItem="EAF-W0-i6u" firstAttribute="top" secondItem="pdk-eI-PRU" secondAttribute="bottom" constant="-20" id="lf5-2F-RhO" userLabel="WhisperTopView.top = Top Layout Guide.bottom"/>
                             <constraint firstItem="Sll-wn-nuF" firstAttribute="centerX" secondItem="HTH-9l-TQ1" secondAttribute="centerX" id="q9C-9g-QqE"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Yy8-PJ-MWf"/>
+                                <exclude reference="lf5-2F-RhO"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="8Na-Ww-Obo"/>
                     <connections>
+                        <outlet property="PersonInfoButton" destination="uIF-vG-oJQ" id="WV1-7s-60v"/>
                         <outlet property="WhisperScrollView" destination="Sll-wn-nuF" id="EAZ-y0-IEO"/>
-                        <outlet property="topBarView" destination="vR7-dP-RYk" id="eZB-PX-DUa"/>
+                        <outlet property="messageButton" destination="Deo-FK-dwf" id="5ba-rw-5d4"/>
+                        <outlet property="topLabelScrollView" destination="CdR-9Q-s9Z" id="2gt-5V-N47"/>
+                        <outlet property="topView" destination="EAF-W0-i6u" id="rej-Iy-sO6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hml-nb-6Rm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="87" y="207"/>
+            <point key="canvasLocation" x="56" y="271"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -120,4 +162,8 @@
             <point key="canvasLocation" x="138" y="981"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="btn_message_normal" width="33" height="33"/>
+        <image name="ic_mine_default" width="33" height="33"/>
+    </resources>
 </document>

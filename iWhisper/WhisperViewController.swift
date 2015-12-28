@@ -7,47 +7,52 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 import SwiftyJSON
 import Alamofire
 
-class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource {
+class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate {
     
-    @IBOutlet weak var WhisperScrollView: UIScrollView!
+    @IBOutlet weak var whisperScrollView: UIScrollView!
+    @IBOutlet weak var topView: UIView!
     
-    @IBOutlet weak var topBarView: UIToolbar!
+    @IBOutlet weak var topLabelScrollView: UIScrollView!
+    @IBOutlet weak var personInfoButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    
     
     var feeds = [Feed]()
+    
     var  feedsViews = [UITableView]()
     var whispers = Dictionary<UITableView,[Whisper]>()
+    
+    var curScrollIndex = 0
+    
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let config = WhisperConfig.sharedInstance.config
-        
         let feedJsons = config!["feeds"]
-       
         let nib = UINib(nibName: "WhisperCell", bundle: nil)
         
-        
-       
-        
+        // init tableview inside scrollview
         let bounds = UIScreen.mainScreen().bounds
         let width = bounds.size.width
         let height = bounds.size.height
-        
-        print("\(topBarView.frame.origin.y) \(topBarView.frame.origin.y + topBarView.frame.height) \(WhisperScrollView.frame.origin.y)")
-        
         var index = 0
-        for (_,feed):(String,SwiftyJSON.JSON) in feedJsons{
-            
-            feeds.append(Feed(json: feed))
+        for (_,feedJson):(String,SwiftyJSON.JSON) in feedJsons{
+            let feed = Feed(json: feedJson)
+            feeds.append(feed)
             let startX = (CGFloat(index) * width )
-            let frame =  CGRectMake( WhisperScrollView.frame.origin.x + startX ,-20,width - WhisperScrollView.frame.origin.x,height)
+            let frame =  CGRectMake(  startX ,-20,width - whisperScrollView.frame.origin.x,height)
             let View = UITableView(frame:frame,style:.Plain)
             View.headerViewForSection(0)
             View.registerClass(WhisperCell.self,forCellReuseIdentifier:"WhisperCell")
             View.registerNib(nib, forCellReuseIdentifier: "WhisperCell")
-            WhisperScrollView.addSubview(View)
+            whisperScrollView.addSubview(View)
             feedsViews.append(View)
             View.dataSource = self
             View.delegate = self
@@ -58,19 +63,90 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         }
         
         let contentW: CGFloat = (CGFloat(feedJsons.array!.count) *  width )
-        WhisperScrollView.contentSize = CGSizeMake(contentW,0)
-        WhisperScrollView.pagingEnabled = true
-        WhisperScrollView.delegate  = self
+        whisperScrollView.contentSize = CGSizeMake(contentW,0)
+        whisperScrollView.pagingEnabled = true
+        whisperScrollView.delegate  = self
+        
+        
         initData()
         
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+        for view in topLabelScrollView.subviews{
+            view.removeFromSuperview()
+        }
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestLocation()
 
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        locationManager.requestLocation()
+        print("update location error\(error)")
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations.last!
+        
+        print("didUpdateLocations:  \(location.coordinate.latitude), \(location.coordinate.longitude)")
+        
+    }
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("didChangeAuthorizationStatus")
+        
+        switch status {
+        case .NotDetermined:
+            print(".NotDetermined;")
+            break
+            
+        case .Authorized:
+            print(".Authorized")
+            locationManager.startUpdatingLocation()
+            break
+            
+        case .Denied:
+            print(".Denied")
+            break
+            
+        default:
+            print("Unhandled authorization status")
+            break
+            
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        var index = 0
+        for feed in feeds {
+            
+            let labelWidth = topLabelScrollView.frame.width / CGFloat(feeds.count )
+            let labelFrame = CGRectMake((CGFloat(index) * labelWidth),topLabelScrollView.frame.origin.y,labelWidth,topLabelScrollView.frame.height)
+            
+            let label = UILabel(frame: labelFrame)
+
+            print(feed.title)
+            label.text = feed.title!
+            label.textAlignment = NSTextAlignment.Center
+            switch (index) {
+            case 0 :
+                label.textColor = UIColor.purpleColor()
+            default:
+                label.textColor = UIColor.grayColor()
+            }
+        
+            topLabelScrollView.addSubview(label)
+            index += 1
+        }
+        super.viewDidAppear(animated)
+    }
+    
     func initData(){
         for i in 0...(feedsViews.count - 1){
             getWhisperData(i)
         }
     }
+    
     
     func getWhisperData(index:Int){
         print("get whisper data\(index)")
@@ -93,7 +169,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
                     whispersInIndex.append(whisper)
                 }
                 let View = self.feedsViews[index]
-                self.whispers[ View] = whispersInIndex
+                self.whispers[View] = whispersInIndex
                 print("get data ok \(index)")
                 self.feedsViews[index].reloadData()
         }
@@ -111,11 +187,10 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return ( WhisperScrollView.frame.size.height / 3)
+        return ( whisperScrollView.frame.size.height / 3)
 
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incplete implementation, return the number of rows
         let tableViewWhispers = self.whispers[tableView]
         if tableViewWhispers != nil {
             return tableViewWhispers!.count
@@ -134,34 +209,25 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         return cell
     }
     
-//    //set Header Height
-//     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 20;
-//    }
-//    
-//    //set Header Title
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Hello"
-//    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let oldIndex = curScrollIndex
+        setLabelColor(oldIndex, color: UIColor.grayColor())
+
+        updateCurScrollIndex(scrollView)
+        setLabelColor(curScrollIndex, color: UIColor.purpleColor())
+
+    }
+    
+    func setLabelColor(index:Int,color:UIColor){
+        let label = topLabelScrollView.subviews[index] as! UILabel
+        UIView.transitionWithView(label, duration: 0.3, options: .TransitionCrossDissolve, animations: { label.textColor = color }, completion: nil)
+    }
+    func updateCurScrollIndex(scrollView: UIScrollView) -> Int {
+        let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        curScrollIndex = index
+        return index
+    }
+
+
 
 }
-
-//
-//private var PERSON_ID_NUMBER_PROPERTY = 0
-//
-//extension UITableView {
-//    var  whisperIndex : Int{
-//               get{
-//                let result = objc_getAssociatedObject(self, &PERSON_ID_NUMBER_PROPERTY) as? Int
-//                if result == nil {
-//                    return 0
-//                }
-//                return result!
-//            }
-//            set{
-//                objc_setAssociatedObject(self, &PERSON_ID_NUMBER_PROPERTY, newValue,objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-//            }
-//            
-//        }
-//    
-//}
