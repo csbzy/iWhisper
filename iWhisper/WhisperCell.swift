@@ -26,7 +26,7 @@ class WhisperCell: UITableViewCell {
     didSet{
         setView.layer.masksToBounds = true
         setView.layer.cornerRadius = 3
-        self.backgroundImage.layoutIfNeeded()
+        //self.backgroundImage.layoutIfNeeded()
         
         self.backgroundImage.hnk_setImageFromURL(NSURL(string: (whisper?.backgroundImage)!)! )/*, format: Format<UIImage>(name: "original"),success:{
             image  in

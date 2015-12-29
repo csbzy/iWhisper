@@ -21,8 +21,11 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     @IBOutlet weak var personInfoButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     
+    @IBOutlet weak var addWhisperButton: UIButton!
+   
     
     var feeds = [Feed]()
+    
     
     var  feedsViews = [UITableView]()
     var whispers = Dictionary<UITableView,[Whisper]>()
@@ -87,6 +90,10 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        
+        let addWhisperButton = UIButton()
+        addWhisperButton.setTitle("hello", forState: UIControlState.Normal)
+        self.view.addSubview(addWhisperButton)
         
         initData()
     }
@@ -222,6 +229,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             label.font = label.font.fontWithSize(fontSize)
             }, completion: nil)
     }
+    
     func updateCurScrollIndex(scrollView: UIScrollView) -> Void {
         if scrollView.contentOffset.x > 0{
             let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
