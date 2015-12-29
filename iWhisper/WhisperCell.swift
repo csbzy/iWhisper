@@ -28,10 +28,11 @@ class WhisperCell: UITableViewCell {
         setView.layer.cornerRadius = 3
         self.backgroundImage.layoutIfNeeded()
         
-        self.backgroundImage.hnk_setImageFromURL(NSURL(string: (whisper?.backgroundImage)!)! , format: Format<UIImage>(name: "original"),success:{
+        self.backgroundImage.hnk_setImageFromURL(NSURL(string: (whisper?.backgroundImage)!)! )/*, format: Format<UIImage>(name: "original"),success:{
             image  in
             self.backgroundImage.image = image
-        })
+            self.backgroundImage.contentMode = UIViewContentMode.Redraw
+        })*/
         
 
         self.transperentView.alpha = 0.4

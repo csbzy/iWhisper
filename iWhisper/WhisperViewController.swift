@@ -12,7 +12,7 @@ import MapKit
 import SwiftyJSON
 import Alamofire
 
-class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate {
+class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate	{
     
     @IBOutlet weak var whisperScrollView: UIScrollView!
     @IBOutlet weak var topView: UIView!
@@ -31,6 +31,14 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     let locationManager = CLLocationManager()
     
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        return refreshControl
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +55,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             let feed = Feed(json: feedJson)
             feeds.append(feed)
             let startX = (CGFloat(index) * width )
-            let frame =  CGRectMake(  startX ,-20,width - whisperScrollView.frame.origin.x,height)
+            let frame =  CGRectMake(  startX ,0,width - whisperScrollView.frame.origin.x,height)
             let View = UITableView(frame:frame,style:.Plain)
             View.headerViewForSection(0)
             View.registerClass(WhisperCell.self,forCellReuseIdentifier:"WhisperCell")
@@ -59,7 +67,9 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             View.estimatedRowHeight = View.rowHeight
             View.rowHeight = UITableViewAutomaticDimension
             View.separatorStyle = .None
+            View.tableHeaderView = nil
             index += 1
+
         }
         
         let contentW: CGFloat = (CGFloat(feedJsons.array!.count) *  width )
@@ -68,7 +78,6 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         whisperScrollView.delegate  = self
         
         
-        initData()
         
         for view in topLabelScrollView.subviews{
             view.removeFromSuperview()
@@ -76,15 +85,15 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-
+        
+        initData()
     }
     
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        locationManager.requestLocation()
-        print("update location error\(error)")
+        
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -93,29 +102,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         print("didUpdateLocations:  \(location.coordinate.latitude), \(location.coordinate.longitude)")
         
     }
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        print("didChangeAuthorizationStatus")
-        
-        switch status {
-        case .NotDetermined:
-            print(".NotDetermined;")
-            break
-            
-        case .Authorized:
-            print(".Authorized")
-            locationManager.startUpdatingLocation()
-            break
-            
-        case .Denied:
-            print(".Denied")
-            break
-            
-        default:
-            print("Unhandled authorization status")
-            break
-            
-        }
-    }
+    
     override func viewDidAppear(animated: Bool) {
         var index = 0
         for feed in feeds {
@@ -128,14 +115,16 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             print(feed.title)
             label.text = feed.title!
             label.textAlignment = NSTextAlignment.Center
+            
+            topLabelScrollView.addSubview(label)
             switch (index) {
             case 0 :
-                label.textColor = UIColor.purpleColor()
+                setLabel(index,color: UIColor.purpleColor() ,fontSize: 12.0)
             default:
-                label.textColor = UIColor.grayColor()
+                setLabel(index,color: UIColor.grayColor() ,fontSize: 8.0)
             }
         
-            topLabelScrollView.addSubview(label)
+            
             index += 1
         }
         super.viewDidAppear(animated)
@@ -147,6 +136,14 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         }
     }
     
+    //上拉刷新拉获取数据
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.refreshControl.beginRefreshing()
+        self.refreshControl.attributedTitle = NSAttributedString(string:"正在刷新。。")
+        print("update fresh")
+        getWhisperData(curScrollIndex)
+        refreshControl.endRefreshing()
+    }
     
     func getWhisperData(index:Int){
         print("get whisper data\(index)")
@@ -211,21 +208,25 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let oldIndex = curScrollIndex
-        setLabelColor(oldIndex, color: UIColor.grayColor())
+        setLabel(oldIndex, color: UIColor.grayColor(),fontSize: 8.0)
 
         updateCurScrollIndex(scrollView)
-        setLabelColor(curScrollIndex, color: UIColor.purpleColor())
+        setLabel(curScrollIndex, color: UIColor.purpleColor(),fontSize:12.0)
 
     }
     
-    func setLabelColor(index:Int,color:UIColor){
+    func setLabel(index:Int,color:UIColor,fontSize: CGFloat){
         let label = topLabelScrollView.subviews[index] as! UILabel
-        UIView.transitionWithView(label, duration: 0.3, options: .TransitionCrossDissolve, animations: { label.textColor = color }, completion: nil)
+        UIView.transitionWithView(label, duration: 0.3, options: .TransitionCrossDissolve, animations: {
+            label.textColor = color
+            label.font = label.font.fontWithSize(fontSize)
+            }, completion: nil)
     }
-    func updateCurScrollIndex(scrollView: UIScrollView) -> Int {
-        let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
-        curScrollIndex = index
-        return index
+    func updateCurScrollIndex(scrollView: UIScrollView) -> Void {
+        if scrollView.contentOffset.x > 0{
+            let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
+            curScrollIndex = index
+        }
     }
 
 
