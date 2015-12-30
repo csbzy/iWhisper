@@ -8,7 +8,6 @@
         <!--Navigation Controller-->
         <scene sceneID="R5v-eR-5tR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bvK-Q3-2wF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="QwB-KQ-JSg" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jjA-vS-uBy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -18,13 +17,14 @@
                         <segue destination="b72-uB-8bu" kind="relationship" relationship="rootViewController" id="Spg-oC-O0u"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bvK-Q3-2wF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-682" y="207"/>
         </scene>
-        <!--New Whisper View Controller-->
+        <!--NewWhisperViewController-->
         <scene sceneID="E2I-BW-R8D">
             <objects>
-                <viewController id="r3Y-H1-q3K" customClass="NewWhisperViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newWhisperID" title="tittle" useStoryboardIdentifierAsRestorationIdentifier="YES" id="r3Y-H1-q3K" userLabel="NewWhisperViewController" customClass="NewWhisperViewController" customModule="iWhisper" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ozf-Rd-AJR"/>
                         <viewControllerLayoutGuide type="bottom" id="36C-6o-lZf"/>
@@ -39,11 +39,21 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  新的耳语" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBF-la-C1j" userLabel="新的耳语">
                                         <rect key="frame" x="268" y="2" width="64" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOa-Zc-0Vj" userLabel="nextButton">
+                                        <rect key="frame" x="532" y="8" width="60" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Dcr-8y-n1y"/>
+                                        </constraints>
+                                        <state key="normal" title="下一步" backgroundImage="btn_bg_purple_pretty_default">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="还能输入87字" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQE-M4-X8a">
-                                        <rect key="frame" x="274" y="20" width="51" height="10"/>
+                                        <rect key="frame" x="275" y="20" width="51" height="10"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -55,16 +65,9 @@
                                             <constraint firstAttribute="width" constant="20" id="alw-oR-hce"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="btn_close"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOa-Zc-0Vj" userLabel="nextButton">
-                                        <rect key="frame" x="532" y="8" width="60" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="Dcr-8y-n1y"/>
-                                        </constraints>
-                                        <state key="normal" title="下一步" backgroundImage="btn_bg_purple_pretty_default">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <connections>
+                                            <action selector="cancelNewWhisper:" destination="r3Y-H1-q3K" eventType="touchUpInside" id="Mb6-T2-1ER"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,13 +87,6 @@
                                     <constraint firstAttribute="bottom" secondItem="TQE-M4-X8a" secondAttribute="bottom" constant="6" id="uL0-Io-yFt"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vNr-v1-MbJ" userLabel="whisperContent">
-                                <rect key="frame" x="0.0" y="100" width="600" height="437"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="locationlabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6r4-RA-8A7" userLabel="localLabel">
                                 <rect key="frame" x="252" y="537" width="97" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -104,17 +100,24 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-bf-Y4V" userLabel="cameraBtn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pze-Bb-ig3" userLabel="refreshTipBtn">
+                                <rect key="frame" x="282" y="64" width="36" height="36"/>
+                                <state key="normal" image="ic_me_nickname_change"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="cameraBtn" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-bf-Y4V" userLabel="cameraBtn">
                                 <rect key="frame" x="300" y="558" width="300" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="拍照" image="btn_camera_normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pze-Bb-ig3" userLabel="refreshTipBtn">
-                                <rect key="frame" x="282" y="64" width="36" height="36"/>
-                                <state key="normal" image="ic_me_nickname_change"/>
-                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vNr-v1-MbJ" userLabel="whisperContent">
+                                <rect key="frame" x="0.0" y="100" width="600" height="437"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -138,18 +141,21 @@
                             <constraint firstItem="jv0-bf-Y4V" firstAttribute="leading" secondItem="6d9-fJ-pnn" secondAttribute="trailing" id="pqZ-9i-nOF"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="1bJ-MR-e6z"/>
                     <connections>
-                        <outlet property="cameraBtn" destination="jv0-bf-Y4V" id="rdc-On-VYh"/>
+                        <outlet property="cameraBtn" destination="jv0-bf-Y4V" id="zFe-O5-uSe"/>
+                        <outlet property="canEnterWordsCount" destination="TQE-M4-X8a" id="B8l-Lt-Hag"/>
+                        <outlet property="cancelBtn" destination="chq-Zx-c4O" id="p8p-7F-ZlE"/>
                         <outlet property="localLabel" destination="6r4-RA-8A7" id="i3b-5e-g41"/>
-                        <outlet property="refreshTipBtn" destination="pze-Bb-ig3" id="U4k-AI-lzT"/>
+                        <outlet property="refreshTipBtn" destination="pze-Bb-ig3" id="rPV-g7-CLD"/>
                         <outlet property="searchImageBtn" destination="6d9-fJ-pnn" id="Kpf-VS-Ifu"/>
-                        <outlet property="topView" destination="jaR-pI-429" id="GSN-Ac-AQa"/>
+                        <outlet property="topView" destination="jaR-pI-429" id="ROf-mW-CjX"/>
                         <outlet property="whisperContent" destination="vNr-v1-MbJ" id="HVk-yh-Dr8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCo-TT-7Iz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="185"/>
+            <point key="canvasLocation" x="1127" y="140"/>
         </scene>
         <!--Whisper View Controller-->
         <scene sceneID="6dR-YZ-SDx">
@@ -221,7 +227,7 @@
                                 </constraints>
                                 <state key="normal" image="ic_create"/>
                                 <connections>
-                                    <segue destination="r3Y-H1-q3K" kind="show" id="XGJ-vl-Nso"/>
+                                    <segue destination="r3Y-H1-q3K" kind="show" id="5JT-OG-oNO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -252,8 +258,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="8Na-Ww-Obo"/>
                     <connections>
-                        <outlet property="PersonInfoButton" destination="uIF-vG-oJQ" id="WV1-7s-60v"/>
-                        <outlet property="WhisperScrollView" destination="Sll-wn-nuF" id="EAZ-y0-IEO"/>
                         <outlet property="addWhisperButton" destination="LSO-vk-ffA" id="qsL-Zm-dTY"/>
                         <outlet property="messageButton" destination="Deo-FK-dwf" id="5ba-rw-5d4"/>
                         <outlet property="personInfoButton" destination="uIF-vG-oJQ" id="9WI-yl-t44"/>

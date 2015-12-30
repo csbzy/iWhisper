@@ -28,7 +28,7 @@ class SplashViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    var navController: UINavigationController!
+    var navController: UIViewController!
 
     //本视图显示前
     override func viewWillAppear(animated: Bool) {
@@ -52,8 +52,7 @@ class SplashViewController: UIViewController {
     
     //动画显示完毕后,把页面跳转到主视图
     func presentNextViewController(timer:NSTimer){
-        print("\(timer.userInfo as? UINavigationController)", terminator: "")
-        let rootNavigationViewController:UINavigationController = timer.userInfo as! UINavigationController
+        let rootNavigationViewController:UIViewController = timer.userInfo as! UIViewController
         self.presentViewController(rootNavigationViewController, animated: true) { () -> Void in
         }
     }
@@ -70,7 +69,7 @@ class SplashViewController: UIViewController {
     func setSplashUrl(url:String){
         self.splashHtmlUrl = url
     }
-    class func getSplashViewInstance(navController: UINavigationController)-> SplashViewController    {
+    class func getSplashViewInstance(navController: UIViewController)-> SplashViewController    {
         let instance = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SplashView") as! SplashViewController
         instance.navController  = navController
         return  instance

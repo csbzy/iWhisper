@@ -26,7 +26,6 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     var feeds = [Feed]()
     
-    
     var  feedsViews = [UITableView]()
     var whispers = Dictionary<UITableView,[Whisper]>()
     
@@ -45,6 +44,13 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if feeds.count == 0 {
+            print("prepareShow")
+            prepareShow()
+        }
+    }
+    
+    func prepareShow(){
         let config = WhisperConfig.sharedInstance.config
         let feedJsons = config!["feeds"]
         let nib = UINib(nibName: "WhisperCell", bundle: nil)
@@ -72,7 +78,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             View.separatorStyle = .None
             View.tableHeaderView = nil
             index += 1
-
+            
         }
         
         let contentW: CGFloat = (CGFloat(feedJsons.array!.count) *  width )
@@ -91,13 +97,9 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        let addWhisperButton = UIButton()
-        addWhisperButton.setTitle("hello", forState: UIControlState.Normal)
-        self.view.addSubview(addWhisperButton)
-        
+    
         initData()
     }
-    
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
@@ -111,7 +113,9 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     }
     
     override func viewDidAppear(animated: Bool) {
-        var index = 0
+        
+        if topLabelScrollView.subviews.count < feeds.count{
+            var index = 0
         for feed in feeds {
             
             let labelWidth = topLabelScrollView.frame.width / CGFloat(feeds.count )
@@ -133,6 +137,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         
             
             index += 1
+        }
         }
         super.viewDidAppear(animated)
     }

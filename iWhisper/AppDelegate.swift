@@ -19,14 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-            let navController = self.window?.rootViewController as? UINavigationController
+            //let navController = self.window?.rootViewController as? UINavigationController
             
-            let rightController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("main") as! WhisperViewController
+           let rightController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("main") as! WhisperViewController
         
-            
-            navController?.pushViewController(rightController, animated: true)
+            //let Controller = UIStoryboard(name:"Main",bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("newWhisperID") as! NewWhisperViewController
         
-            let splashViewContorller  = SplashViewController.getSplashViewInstance(navController!)
+            //rightController.navController = navController
+           // Controller.navController = navController
+           // navController?.pushViewController(Controller, animated: true)
+           // navController?.pushViewController(rightController, animated: true)
+        
+        
+            let splashViewContorller  = SplashViewController.getSplashViewInstance(rightController)
         
             self.window?.rootViewController = splashViewContorller
             WhisperConfig.sharedInstance.getConfigOnline(){
