@@ -20,6 +20,7 @@
 		430512E51C2A266600276E57 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 430512AA1C2A263F00276E57 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		430512E91C2A26FD00276E57 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430512E81C2A26FD00276E57 /* utils.swift */; };
 		430512EB1C2A308A00276E57 /* WhisperConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430512EA1C2A308A00276E57 /* WhisperConfig.swift */; };
+		43EF7A901C33B3D6002E0DA1 /* WhisperLocationControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EF7A8F1C33B3D6002E0DA1 /* WhisperLocationControl.swift */; };
 		43F6C2221C3362CA004A5892 /* NewWhisperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F6C2201C3362CA004A5892 /* NewWhisperViewController.swift */; };
 		43FCABA21C294DD10001A3AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FCABA11C294DD10001A3AD /* AppDelegate.swift */; };
 		43FCABA41C294DD10001A3AD /* WhisperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FCABA31C294DD10001A3AD /* WhisperViewController.swift */; };
@@ -200,6 +201,7 @@
 		430512C31C2A265600276E57 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = iWhisper/LIBRARY/SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = "<group>"; };
 		430512E81C2A26FD00276E57 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		430512EA1C2A308A00276E57 /* WhisperConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperConfig.swift; sourceTree = "<group>"; };
+		43EF7A8F1C33B3D6002E0DA1 /* WhisperLocationControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperLocationControl.swift; sourceTree = "<group>"; };
 		43F6C2201C3362CA004A5892 /* NewWhisperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWhisperViewController.swift; sourceTree = "<group>"; };
 		43FCAB9E1C294DD10001A3AD /* iWhisper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWhisper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43FCABA11C294DD10001A3AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				4300EC1D1C2A94FA00357859 /* FeedTableViewController.swift */,
 				43FCABA31C294DD10001A3AD /* WhisperViewController.swift */,
+				43EF7A8F1C33B3D6002E0DA1 /* WhisperLocationControl.swift */,
 				43FCABB61C294DF30001A3AD /* SplashViewController.swift */,
 				43F6C2201C3362CA004A5892 /* NewWhisperViewController.swift */,
 			);
@@ -556,6 +559,7 @@
 				43FCABA21C294DD10001A3AD /* AppDelegate.swift in Sources */,
 				43F6C2221C3362CA004A5892 /* NewWhisperViewController.swift in Sources */,
 				4300EC1E1C2A94FA00357859 /* FeedTableViewController.swift in Sources */,
+				43EF7A901C33B3D6002E0DA1 /* WhisperLocationControl.swift in Sources */,
 				43FCABAA1C294DD10001A3AD /* iWhisper.xcdatamodeld in Sources */,
 				430512EB1C2A308A00276E57 /* WhisperConfig.swift in Sources */,
 				4300EC241C2A96AF00357859 /* WhisperCell.swift in Sources */,
@@ -693,6 +697,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iWhisper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chensb.iwhisper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -706,6 +711,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iWhisper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chensb.iwhisper;
 				PRODUCT_NAME = "$(TARGET_NAME)";

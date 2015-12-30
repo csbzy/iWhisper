@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import CoreLocation
-import MapKit
+
 import SwiftyJSON
 import Alamofire
 
-class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate	{
+class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource	{
     
     @IBOutlet weak var whisperScrollView: UIScrollView!
     @IBOutlet weak var topView: UIView!
@@ -30,10 +29,8 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     var whispers = Dictionary<UITableView,[Whisper]>()
     
     var curScrollIndex = 0
-    
-    let locationManager = CLLocationManager()
-    
-    
+
+
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -92,25 +89,9 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             view.removeFromSuperview()
         }
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        
-    
         initData()
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        
-    }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let location = locations.last!
-        
-        print("didUpdateLocations:  \(location.coordinate.latitude), \(location.coordinate.longitude)")
-        
-    }
     
     override func viewDidAppear(animated: Bool) {
         
@@ -161,7 +142,13 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         print("get whisper data\(index)")
         var feedParams = Dictionary<String,AnyObject>()
         if( feeds[index].needLocation == true) {
-            feedParams = ["feed_id":feeds[index].id!, "type":feeds[index].type!,"limit":LIMIT,"uid":UID,"lat":22.54911,"lon":113.942959]
+            if let location = WhisperLocationControl.sharedInstance.location{
+                feedParams = ["feed_id":feeds[index].id!, "type":feeds[index].type!,"limit":LIMIT,"uid":UID,"lat":location.coordinate.latitude,"lon": location.coordinate.longitude]
+            }else{
+                feedParams = ["feed_id":feeds[index].id!, "type":feeds[index].type!,"limit":LIMIT,"uid":UID,"lat":22.54911,"lon":113.942959]
+            }
+            
+            print(WhisperLocationControl.sharedInstance.location?.coordinate.latitude, WhisperLocationControl.sharedInstance.location?.coordinate.longitude)
             
         }else{
             feedParams = ["feed_id":feeds[index].id!, "type":feeds[index].type!, "limit":LIMIT,"uid":UID]

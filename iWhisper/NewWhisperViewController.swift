@@ -20,15 +20,10 @@ class NewWhisperViewController: UIViewController {
     
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var cameraBtn: UIButton!
-    var navController : UINavigationController! {
-        didSet{
-            print("did set")
-        }
-    }
+
 
     @IBOutlet weak var canEnterWordsCount: UILabel!
     override func viewDidLoad() {
-        print("view didi load")
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -41,7 +36,6 @@ class NewWhisperViewController: UIViewController {
     
     @IBAction func cancelNewWhisper(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
         })
 
     }
