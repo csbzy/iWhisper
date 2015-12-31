@@ -227,6 +227,10 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
             curScrollIndex = index
         }
+        
+        if scrollView.contentOffset.y > 0{
+            
+        }
     }
 
 

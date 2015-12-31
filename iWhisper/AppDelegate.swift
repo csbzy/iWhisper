@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
             self.window?.rootViewController = splashViewContorller
             WhisperConfig.sharedInstance.getConfigOnline(){
-                splashViewContorller.splashHtmlUrl = WhisperConfig.sharedInstance.config!["splash",0,"url"].string
-//              
+                splashViewContorller.splashHtmlUrl = WhisperConfig.sharedInstance.config!["splash",0,"url"].string           
             }
             return true
     }
