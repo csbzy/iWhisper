@@ -31,12 +31,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     var curScrollIndex = 0
 
 
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
-        
-        return refreshControl
-        }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +69,13 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             View.rowHeight = UITableViewAutomaticDimension
             View.separatorStyle = .None
             View.tableHeaderView = nil
+            let refreshControl: UIRefreshControl = {
+                let refreshControl = UIRefreshControl()
+                refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+                
+                return refreshControl
+                }()
+            View.addSubview(refreshControl)
             index += 1
             
         }
@@ -82,9 +84,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         whisperScrollView.contentSize = CGSizeMake(contentW,0)
         whisperScrollView.pagingEnabled = true
         whisperScrollView.delegate  = self
-        
-        
-        
+    
         for view in topLabelScrollView.subviews{
             view.removeFromSuperview()
         }
@@ -131,8 +131,8 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     
     //上拉刷新拉获取数据
     func handleRefresh(refreshControl: UIRefreshControl) {
-        self.refreshControl.beginRefreshing()
-        self.refreshControl.attributedTitle = NSAttributedString(string:"正在刷新。。")
+        refreshControl.beginRefreshing()
+        refreshControl.attributedTitle = NSAttributedString(string:"正在刷新。。")
         print("update fresh")
         getWhisperData(curScrollIndex)
         refreshControl.endRefreshing()

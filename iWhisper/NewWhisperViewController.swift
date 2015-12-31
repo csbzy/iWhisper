@@ -86,8 +86,10 @@ class NewWhisperViewController: UIViewController {
     }
     
     func displayTip(){
+        if self.tips.count > 0 {
         self.tipLabel.text = self.tips.removeAtIndex(0)
         self.tipLabel.hidden = false
+        }
     }
     
     
