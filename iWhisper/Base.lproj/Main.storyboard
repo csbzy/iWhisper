@@ -176,6 +176,7 @@
                         <outlet property="localLabel" destination="6r4-RA-8A7" id="i3b-5e-g41"/>
                         <outlet property="refreshTipBtn" destination="pze-Bb-ig3" id="rPV-g7-CLD"/>
                         <outlet property="searchImageBtn" destination="6d9-fJ-pnn" id="Kpf-VS-Ifu"/>
+                        <outlet property="tipLabel" destination="6PO-8Z-F9f" id="Nv1-mz-QGC"/>
                         <outlet property="topView" destination="jaR-pI-429" id="ROf-mW-CjX"/>
                         <outlet property="whisperContent" destination="vNr-v1-MbJ" id="HVk-yh-Dr8"/>
                     </connections>
