@@ -1,2 +1,3 @@
 #####iWhisper
-![SHOW](https://github.com/chenshaobo/iWhisper/SHOW.gif)
+
+![虚拟机录制，有点卡](https://github.com/chenshaobo/iWhisper/blob/master/SHOW.gif)
