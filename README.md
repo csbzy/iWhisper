@@ -1,3 +1,2 @@
 #####iWhisper
-
-![SHOW](https://github.com/chenshaobo/iWhisper/SHOW.git)
+![SHOW](https://github.com/chenshaobo/iWhisper/SHOW.gif)
