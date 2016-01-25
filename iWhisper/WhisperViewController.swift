@@ -105,7 +105,7 @@ class WhisperViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             let label = UILabel(frame: labelFrame)
 
             print(feed.title)
-            label.text = feed.title!
+            label.text = feed.title!	
             label.textAlignment = NSTextAlignment.Center
             
             topLabelScrollView.addSubview(label)

@@ -22,7 +22,7 @@ class NewWhisperViewController: UIViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var cameraBtn: UIButton!
     
-    @IBOutlet weak var backgroundImage: UITextView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var tipLabel: UILabel!
     var tips = [String]()
     var  scrollID = 0
@@ -38,6 +38,7 @@ class NewWhisperViewController: UIViewController {
         whisperContent.layer.masksToBounds = true
         whisperContent.layer.cornerRadius = 10
         getTips(){}
+        viewStep = 0
         // Do any additional setup after loading the view.
     }
 
@@ -102,24 +103,23 @@ class NewWhisperViewController: UIViewController {
     func  updateStep(){
         switch viewStep{
         case 0 :
+            whisperContent.hidden = false
             backgroundImage.hidden = true
+            tipLabel.hidden = false
+            searchImageBtn.hidden = true
+            cameraBtn.hidden  = true
 
         case 1 :
             backgroundImage.hidden = false
+            tipLabel.hidden = true
+            searchImageBtn.hidden = false
+            cameraBtn.hidden  = false
+            
         default :
             backgroundImage.hidden = true
             
         }
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
